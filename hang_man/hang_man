@@ -1,0 +1,51 @@
+import random
+from hangman_art import stages
+from hangman_art import logo
+from hangman_words import word_list
+
+# Stage 1 pick a random word to play the game
+word_guess = random.choice(word_list)
+word_count = int(len(word_guess))
+
+# User Display
+user_disp = []
+for i in range(word_count):
+    user_disp.append("_")
+
+#User first interface
+print(logo)
+print(stages[-1])
+print(user_disp)
+print(word_guess)
+
+
+cherk_val = False
+live_count = 6
+num = 0
+
+while cherk_val == False:
+
+    guess = input("Guess a letter: ")
+    if guess in user_disp:
+        print(f"You've already guessed {guess}")
+    for i in range(word_count):
+        letter = word_guess[i]
+        if letter == guess:
+            user_disp[i] = guess
+    print(user_disp)
+    if guess in user_disp:
+        print(f"You've already guessed {guess}")
+    if guess not in word_guess and guess not in user_disp:
+            print(stages[live_count])
+            live_count -= 1
+            if live_count == 0:
+                print("******* GAME-OVER **********")
+                cherk_val = True
+    if "_" not in user_disp:
+        print("******Congragulation********\n YOU WIN!!!!!!!!")
+        cherk_val = True
+    
+
+   
+   
+
